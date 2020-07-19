@@ -68,10 +68,12 @@ class ClinicRepository {
                 it[addr] = clinic.addr
                 it[phone] = clinic.phone
             } get Clinics.id
-            PriceList.batchInsert(clinic.services) {item ->
-                this[PriceList.clinic_id] = id
-                this[PriceList.diagnostic_id] = item.diagnostic_id
-                this[PriceList.price] = item.price
+            if (clinic.services.isNotEmpty()) {
+                PriceList.batchInsert(clinic.services) { item ->
+                    this[PriceList.clinic_id] = id
+                    this[PriceList.diagnostic_id] = item.diagnostic_id
+                    this[PriceList.price] = item.price
+                }
             }
         }
     }

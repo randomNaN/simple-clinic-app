@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  postgres:
+    restart: always
+    image: postgres:10
+    ports:
+      - "5432:5432"
+    environment:
+      - DEBUG=false
+      - POSTGRES_USER=testuser
+      - POSTGRES_PASSWORD=mpassword
+      - POSTGRES_DB=clinicdb
+    volumes:
+      - /tmp/postgresql:/var/lib/postgresql
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres

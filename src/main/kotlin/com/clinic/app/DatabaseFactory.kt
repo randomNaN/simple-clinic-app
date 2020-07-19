@@ -30,6 +30,7 @@ object DatabaseFactory {
         props.setProperty("dataSource.password", dbPassword)
         props.setProperty("dataSource.databaseName", "clinicdb")
         props.setProperty("dataSource.reWriteBatchedInserts", "true")
+        props.setProperty("dataSource.serverName", "postgres")
         val config = HikariConfig(props)
         return HikariDataSource(config)
     }
